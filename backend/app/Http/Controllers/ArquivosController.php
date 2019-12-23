@@ -15,9 +15,22 @@ class ArquivosController extends Controller
     {
         //
     }
+    
+    public function geraNome($nomeatual){
+       
+        $posicaoPonto = strpos($nomeatual, ".");
+      
+        $nomeSemExtensao = substr($nomeatual, 0, $posicaoPonto);
+      
+        $extensao = substr($nomeatual, $posicaoPonto, strlen($nomeatual));
+      
+    }
 
     public function salvar(Request $request){
-        var_dump($request->input('arquivos'));
+       $arquivos = $request->input('arquivos');
+       $this->geraNome($arquivos[0]['name']);
+    //    var_dump($arquivos[0]);
+      
 
         return response()->json([
             'teste' => 'Felipe'

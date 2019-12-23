@@ -8,7 +8,6 @@ class Arquivos extends Component {
         e.preventDefault()
         let arquivosRaw = document.getElementById("meu-input").files
         this.converteArrayArquivos(arquivosRaw).then(r => {
-            console.log(r)
             fetch('http://gdoc-ms.test/salvaarquivos', {
                 headers: {
                     'Accept': 'application/json',
@@ -16,12 +15,8 @@ class Arquivos extends Component {
                 },
                 method: 'post',
                 body: JSON.stringify({
-                    arquivosFotos: r
+                    arquivos: r
                 })
-                // body: {
-                //     hoje: "sexta-feira",
-                //     arquivos: r
-                // }
             })
         })
     }
@@ -33,8 +28,8 @@ class Arquivos extends Component {
     })
 
     converteArrayArquivos = arquivos => new Promise(sucesso => {
-        let arquivosConvertidos = []
         let arquivosArray = Array.from(arquivos)
+        let arquivosConvertidos = []
         arquivosArray.map((a) => {
             this.converteUnit(a).then(r => {
                 let arqTemp = {
@@ -45,10 +40,9 @@ class Arquivos extends Component {
                 arquivosConvertidos.push(arqTemp)
             })
         })
-        // console.log("imprimindo arquivosConvertidos")
-        // console.log(arquivosConvertidos)
-        // sucesso("passei sim...")
-        sucesso(arquivosConvertidos)
+        setTimeout(() => {
+            sucesso(arquivosConvertidos)
+        }, 1000)
     })
 
     render() {
@@ -66,8 +60,6 @@ class Arquivos extends Component {
                                     <input className="file-path validate" type="text" placeholder="Upload one or more files" />
                                 </div>
                             </div>
-
-
                         </form>
                     </div>
                     <div className="col s1">
