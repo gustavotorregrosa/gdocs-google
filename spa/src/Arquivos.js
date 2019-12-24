@@ -4,6 +4,15 @@ import M from 'materialize-css'
 
 class Arquivos extends Component {
 
+    state = {
+        arquivos: [
+            {
+                id: 1,
+                nome: 'arquivo1.pdf' 
+            }
+        ]
+    }
+
     enviaArquivos = (e) => {
         e.preventDefault()
         let arquivosRaw = document.getElementById("meu-input").files
@@ -32,11 +41,13 @@ class Arquivos extends Component {
         let arquivosConvertidos = []
         arquivosArray.map((a) => {
             this.converteUnit(a).then(r => {
+                r = r.split('base64,')[1]
                 let arqTemp = {
                     name: a.name,
                     type: a.type,
                     base64: r
                 }
+                console.log(arqTemp)
                 arquivosConvertidos.push(arqTemp)
             })
         })
@@ -65,6 +76,11 @@ class Arquivos extends Component {
                     <div className="col s1">
                         <a onClick={e => this.enviaArquivos(e)} className="waves-effect waves-teal btn-flat">Enviar</a>
                     </div>
+                </div>
+                <br/><br/><br/><br/><br/><br/>
+                <div className="row">
+
+
                 </div>
             </div>
 
