@@ -17,6 +17,21 @@ class ArquivosController extends Controller
         //
     }
 
+    public function index(){
+        $arquivos = Arquivo::all();
+
+        return response()->json($arquivos);
+    }
+
+    public function delete($id){
+        $arquivo = Arquivo::find($id);
+        unlink($_SERVER["DOCUMENT_ROOT"]."/arquivos/".$arquivo->nome);
+        $arquivo->delete();
+        return response("Arquivo deletado", 200);
+
+    
+    }
+
     public function geraNome($nomeatual)
     {
         $nomeSemExtensao = $nomeatual;

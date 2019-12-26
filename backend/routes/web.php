@@ -16,3 +16,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post('/salvaarquivos', 'ArquivosController@salvar');
+
+$router->get('/getarquivos', 'ArquivosController@index');
+
+$router->delete('/deletaarquivo/{id}', 'ArquivosController@delete');

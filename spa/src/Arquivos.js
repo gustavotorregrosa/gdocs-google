@@ -1,17 +1,62 @@
 import React, { Component } from 'react'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css'
+import TabelaArquivos from './TabelaArquivos'
+import DeletaArquivo from './ModalDeletaArquivo'
 
 class Arquivos extends Component {
 
     state = {
-        arquivos: [
-            {
-                id: 1,
-                nome: 'arquivo1.pdf' 
-            }
-        ]
+        arquivos: []
     }
+
+    componentDidMount() {
+        this.getArquivos()
+    }
+
+    
+    abreModalDeleta = (e, id) => {
+        e.preventDefault()
+        let arquivo = this.state.arquivos.filter(el => el.id == id)
+        arquivo = arquivo[0]
+        this.childAbreModalDeleta(arquivo)
+
+    }     
+
+    chamaDownload = (e, id) => {
+        e.preventDefault()
+        let nome
+        this.state.arquivos.map(arq => {
+            if (arq.id == id) {
+                nome = arq.nome
+            }
+        })
+        let url = 'http://gdoc-ms.test/arquivos/' + nome
+        this.openInNewTab(url)
+    }
+
+
+    openInNewTab = (url) => {
+        // let win = window.open(url, '_blank');
+        let win = window.open(url, 'Download');
+        win.focus();
+    }
+
+    getArquivos = () => {
+        fetch('http://gdoc-ms.test/getarquivos', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'get'
+        }).then(data => data.json()).then(data => {
+            this.setState({
+                arquivos: data
+            })
+        })
+    }
+
+
 
     enviaArquivos = (e) => {
         e.preventDefault()
@@ -26,7 +71,7 @@ class Arquivos extends Component {
                 body: JSON.stringify({
                     arquivos: r
                 })
-            })
+            }).then(data => this.getArquivos())
         })
     }
 
@@ -47,7 +92,6 @@ class Arquivos extends Component {
                     type: a.type,
                     base64: r
                 }
-                console.log(arqTemp)
                 arquivosConvertidos.push(arqTemp)
             })
         })
@@ -77,11 +121,12 @@ class Arquivos extends Component {
                         <a onClick={e => this.enviaArquivos(e)} className="waves-effect waves-teal btn-flat">Enviar</a>
                     </div>
                 </div>
-                <br/><br/><br/><br/><br/><br/>
+                <br /><br /><br /><br /><br /><br />
                 <div className="row">
-
+                    <TabelaArquivos abreModalDeleta={(e, key) => this.abreModalDeleta(e, key)} ativaDownload={(e, key) => this.chamaDownload(e, key)} arquivos={this.state.arquivos} />
 
                 </div>
+                <DeletaArquivo refreshArquivos={() => this.getArquivos()} setAbreModal={f => this.childAbreModalDeleta = f}/>
             </div>
 
         )
