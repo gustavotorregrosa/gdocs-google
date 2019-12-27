@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Google_Client;
+use Google_Service_Drive;
+
 class GDriveController extends Controller
 {
     /**
@@ -15,6 +18,12 @@ class GDriveController extends Controller
     }
 
     public function salvar($id){
+
+        $client = new Google_Client();
+        $client->setAuthConfig($_SERVER["DOCUMENT_ROOT"]."/../suporte/credenciais.json");
+        $client->addScope(Google_Service_Drive::DRIVE);
+        var_dump($client);
+        die();
         
         $resultado = "";
         var_dump($resultado);
