@@ -15,6 +15,7 @@ class CriaTblArquivos extends Migration
     {
         Schema::create('arquivos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('id_one_drive')->nullable();
             $table->string('nome');
             $table->string('nomeoriginal');
             $table->timestamps();
