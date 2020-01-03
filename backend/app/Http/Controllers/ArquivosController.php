@@ -57,32 +57,32 @@ class ArquivosController extends Controller
         $data = base64_decode($arq['base64']);
         fwrite($fp, $data);
         fclose($fp);
-        return $nome;
+        return [
+            'nome' => $nome,
+            'conteudo' => $data
+        ];
     }
 
     public function salvar(Request $request)
     {
         $arquivos = $request->input('arquivos');
         $listaNomes = [];
+        $listaNomesConteudo = [];
         foreach($arquivos as $a){
+            $arrayTempParamArquivo = $this->salvarUnit($a);
+            $listaNomesConteudo[] = $arrayTempParamArquivo;
             $listaNomes[] = [
                 'nomeoriginal' => $a['name'],
-                'nome' => $this->salvarUnit($a)
+                'nome' => $arrayTempParamArquivo['nome']
             ];
         }
         foreach($listaNomes as $a){
             Arquivo::create($a);
         }
-
         $oneDrive = new MOneDrive;
-
-        foreach($listaNomes as $a){
-            $oneDrive->salvaArquivo();
-
+        foreach($listaNomesConteudo as $a){
+            $oneDrive->salvaArquivo($a['nome'], $a['conteudo']);
         }
-       
         return response()->json($listaNomes);
     }
-
-    //
 }
