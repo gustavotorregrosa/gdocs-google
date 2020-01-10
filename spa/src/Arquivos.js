@@ -31,7 +31,7 @@ class Arquivos extends Component {
                 nome = arq.nome
             }
         })
-        let url = 'http://gdocs-ms.test/arquivos/' + nome
+        let url = 'http://gdoc-ms.test/arquivos/' + nome
         this.openInNewTab(url)
     }
 
@@ -43,7 +43,7 @@ class Arquivos extends Component {
     }
 
     getArquivos = () => {
-        fetch('http://gdocs-ms.test/getarquivos', {
+        fetch('http://gdoc-ms.test/getarquivos', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ class Arquivos extends Component {
         e.preventDefault()
         let arquivosRaw = document.getElementById("meu-input").files
         this.converteArrayArquivos(arquivosRaw).then(r => {
-            fetch('http://gdocs-ms.test/salvaarquivos', {
+            fetch('http://gdoc-ms.test/salvaarquivos', {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'

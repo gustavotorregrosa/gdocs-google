@@ -46,7 +46,7 @@ class TabelaArquivos extends Component {
                     <thead>
                         <tr>
                             <th>Arquivo</th>
-                            <th>A��es</th>
+                            <th>Acoes</th>
                         </tr>
                     </thead>
                     <tbody>

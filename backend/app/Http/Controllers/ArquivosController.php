@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Arquivo;
 use Illuminate\Http\Request;
+use App\MeuLogger;
+
 
 
 class ArquivosController extends Controller
@@ -28,9 +30,15 @@ class ArquivosController extends Controller
         $arquivo = Arquivo::find($id);
         unlink($_SERVER["DOCUMENT_ROOT"]."/arquivos/".$arquivo->nome);
         $arquivo->delete();
-        return response("Arquivo deletado", 200);
+        return response("Arquivo deletado", 200);    
+    }
 
-    
+    public function teste(){
+        MeuLogger::debug("foi.....");
+        // $meuLogger = new Logger('meuLogger');
+        // $meuLogger->pushHandler(new StreamHandler('../storage/logs/meulog.log', Logger::DEBUG));
+        // $meuLogger->debug('teste chegou aqui...');
+        var_dump("ola mundo");
     }
 
     public function geraNome($nomeatual)
