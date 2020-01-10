@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Arquivo;
 use Illuminate\Http\Request;
 use App\MeuLogger;
-
-
+use Google_Client;
+use Google_Service_Drive;
 
 class ArquivosController extends Controller
 {
@@ -35,10 +35,23 @@ class ArquivosController extends Controller
 
     public function teste(){
         MeuLogger::debug("foi.....");
-        // $meuLogger = new Logger('meuLogger');
-        // $meuLogger->pushHandler(new StreamHandler('../storage/logs/meulog.log', Logger::DEBUG));
-        // $meuLogger->debug('teste chegou aqui...');
-        var_dump("ola mundo");
+        $gClient = new Google_Client;
+        $gClient->setApplicationName('meu-gdrive');
+        $gClient->setDeveloperKey('AIzaSyC0Yl1AHdWkUqPO2utTaFPAd_8Wv-ZI_P4');
+        $token = $gClient->getAccessToken();
+        $gClient->addScope(Google_Service_Drive::DRIVE);
+        $gClient->getOAuth2Service();
+        $token = $gClient->getAccessToken();
+        var_dump($token);
+        // $service = new Google_Service_Drive($gClient);
+        // $files = $service->files->listFiles([])->getItems();
+
+    //    var_dump($files);
+    // $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+    // var_dump($redirect_uri);
+
+
+        // var_dump("ola mundo");
     }
 
     public function geraNome($nomeatual)
