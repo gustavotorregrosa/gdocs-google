@@ -30,7 +30,7 @@ class ModalDeletaArquivo extends Component {
     deletaAquivo = e => {
         e.preventDefault()
         let id = this.state.id
-        fetch('http://gdoc-ms.test/deletaarquivo/'+id, {
+        fetch('http://gdocs-ms.test/deletaarquivo/'+id, {
             method: 'delete'
         }).then(data => {
             M.toast({html: 'Arquivo deletado'})

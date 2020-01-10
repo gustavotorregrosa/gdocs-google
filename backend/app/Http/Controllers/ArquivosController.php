@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Arquivo;
 use Illuminate\Http\Request;
-use App\MOneDrive;
+
 
 class ArquivosController extends Controller
 {
@@ -79,10 +79,10 @@ class ArquivosController extends Controller
         foreach($listaNomes as $a){
             Arquivo::create($a);
         }
-        $oneDrive = new MOneDrive;
-        foreach($listaNomesConteudo as $a){
-            $oneDrive->salvaArquivo($a['nome'], $a['conteudo']);
-        }
+        // $oneDrive = new MOneDrive;
+        // foreach($listaNomesConteudo as $a){
+        //     $oneDrive->salvaArquivo($a['nome'], $a['conteudo']);
+        // }
         return response()->json($listaNomes);
     }
 }
