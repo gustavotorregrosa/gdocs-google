@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Arquivo;
 use Illuminate\Http\Request;
 use App\MeuLogger;
+use Exception;
 use Google_Client;
 use Google_Service_Drive;
 
@@ -36,14 +37,26 @@ class ArquivosController extends Controller
     public function teste(){
         MeuLogger::debug("foi.....");
         $gClient = new Google_Client;
-        $gClient->setApplicationName('meu-gdrive');
-        $gClient->setDeveloperKey('AIzaSyC0Yl1AHdWkUqPO2utTaFPAd_8Wv-ZI_P4');
-        $token = $gClient->getAccessToken();
+        $gClient->setApplicationName('minha-api-drive');
+        $gClient->setDeveloperKey('AIzaSyDRqCOEjBASPw-VQkpmP4adxAqO0x_-BkU');
         $gClient->addScope(Google_Service_Drive::DRIVE);
-        $gClient->getOAuth2Service();
-        $token = $gClient->getAccessToken();
-        var_dump($token);
-        // $service = new Google_Service_Drive($gClient);
+        $service = new Google_Service_Drive($gClient);
+        try {
+            $arquivos = $service->files->listFiles()->getFiles();
+            var_dump($arquivos);
+        } catch(Exception $e){
+            var_dump("deu erro");
+            var_dump($e);
+
+        }
+        // $arquivos = $service->files->listFiles()
+       
+        // $token = $gClient->getAccessToken();
+        // $gClient->addScope(Google_Service_Drive::DRIVE);
+        // $gClient->getOAuth2Service();
+        // $token = $gClient->getAccessToken();
+        // var_dump($token);
+        
         // $files = $service->files->listFiles([])->getItems();
 
     //    var_dump($files);
