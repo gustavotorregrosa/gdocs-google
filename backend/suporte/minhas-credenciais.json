@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "meu-projeto-264622",
+  "private_key_id": "40ce4e2733efc2ede99d958f35fe28a4963c4167",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCrvfplEzqOBWN6\nMemQ9yzv7THcs59gnwUFY3b2MVOEadYmajKopyQARfqDarAfPjesiokpOwnkc3Qh\nC50xWj/fpfpwBxTqSd33+u/LwacD8Yg2W3mTHUZ7mWUAi6/d9nzgGy+RlDBj81WV\n0e8h/CMo/HtGAXRX3DVZKMD4vF3AUOnV/WTDhgr958qkONil3keFRjy8zehE645C\ntx4U058jVSQ7n8wiyaeehOc/kN72Sej1XA6eCguU7tMLjvpPiupNnjbWz8r3Uz6m\nB0TUkXU7xuHJ7DdN5js0JOt9KUZeGxIxNDF2xYuXV/6gRO7sBHtsuD2REuQPngkX\n4+H/UzglAgMBAAECggEACrWo6aioHB2F6IoFEKWS4QG5L3qCbWbWzB4GixYXj5UY\nZgJ1Vw/YYa2VEG2uWFee5sMoCBdgZ78AKbD5t0KNFrs/Wyd15gfl/NLIvu7VvwJo\nbH6KN3xTd6p6VYbG2GAu+IkTD4PE+/A7d0F4i6jKrU5uH+pAGqjmwsD7cTqXdg77\nfxon9xmvWRgL72aaNqUZ6aBv6D5ZtUX9zzL8dn/zbKFzuYXAT2sSLyjE2JoxnXMX\nBBZozWnC6Y+uWh5xFgmnyC/GqkcnW4B0qfyk26styRA4Ur3+O/V0xj/dkA0pubxg\nVgXX2KveLNJjl/MJosaqTgqrUt3B/IL5KpkoNLk4uQKBgQDTNPY9p/ty0/J8QMaC\nOx/t1YZNXh1mALRAVpHvuB6oeypLyKQedusuR92/QIKbkMYZISP5lKZaSlffPzcU\nvXuEGu8dYZ6tIvSXqB218X6pQof/vXrhHHtImf9fP/l85Nons5OkU39h7olbt4DP\nQ535YK98SF/4k55PlNSrGLxVYwKBgQDQKlutB6TAB55yYPuFEZx24bCnpCeHegfa\n6iqDosNs/ICEBgvTO44xia7ZIitqR/q/+ELM9fxQpEEDxYdHInz7SvDrRpLPCWAe\nyIK5cCNRaH7Dy6cFcI3OHRNkzj37muXU96pBnGn9hGPe325BuJFjAhNxlYD6ug2m\nq+GC9DsW1wKBgB7cVj6cFPmqTnwpWtgcm4W89WrInbMR10SvYZONa61ikcORBaoN\n5j9U8OnJG0xv0wJI/WCyf7whsMVGD15QcYPUC6xXX0AdI3AleHHlX4SL3CNaJGJQ\nLxNkrRPV3TaKmfXDH4ebS7mbiSaFoaSnVKXjosCeMqe3qiImtQxrCNnRAoGAcskI\nqE7wr9sDqfqEdwoRBxTIPoisK25E6pf5PYEA1hYeH67d0mqiq/pJ6f2HhyGNyVFy\nNGbn7OfF2fiP8c+4rzDRzEqsJXH8CL10KCEHuJowXHLt9HfuGdu6l/mKADWXymmO\n/oLrhxn7oCgAOkk2EixQ4G8aIid545Af2AAonR0CgYAewPA380YQV8jn70vZk2jy\n6P9H5BSg2zrFb/r2GbpOKAihznO+HBKYUl7zkHJGpOkLrAh+RoXKXPBUD69+BWSE\nnKQiUueth5RKzcKRJYIBHef6fyRTpWjLpIpp/mvLJC3sgxGDTqP0xMHNCjsGDpl2\newV0RulfpWgx3D49JdxRjg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "gustavo-torregrosa@meu-projeto-264622.iam.gserviceaccount.com",
+  "client_id": "109591765783914340584",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gustavo-torregrosa%40meu-projeto-264622.iam.gserviceaccount.com"
+}
