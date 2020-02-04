@@ -16,47 +16,46 @@ class GToken extends Model
 
     public function __construct()
     {
-        var_dump("bateu aqui");
+        // var_dump("bateu aqui");
         // $this->meuToken = self::firstOrCreate([
         //     'id' => 1
         // ]);
     }
 
+
+    public function atualizaToken(){
+        $meuToken = null;
+        $meuClient = new Google_Client;
+        $meuClient->useApplicationDefaultCredentials();
+        $meuClient->addScope(Google_Service_Drive::DRIVE);
+        $tokenCallback = function ($cacheKey, $accessToken) use (&$meuToken){
+            $meuToken = $accessToken;
+          };
+        $meuClient->setTokenCallback($tokenCallback);
+        $httpClient = $meuClient->authorize();
+        $response = $httpClient->get('https://www.googleapis.com/auth/drive');
+        $this->access_token = $meuToken;
+        $this->save();
+    }
+
+
     public function getAccessToken()
     {
 
-        $this->meuToken = self::firstOrCreate([
-            'id' => 1
-        ]);
-
+        try{
+            $this->meuToken = self::findOrFail(1);
+        }catch(\Exception $e){
+            $this->meuToken = new self;
+        }
+    
         $tokenExpirado = false;
         if(Carbon::now()->diffInMinutes($this->meuToken->updated_at) > 5){
             $tokenExpirado = true;
         }
 
-     
-       
         if (!$this->meuToken->access_token || $tokenExpirado) {
-
-            var_dump("passa aqui??");
-            $meuClient = new Google_Client;
-            $meuClient->useApplicationDefaultCredentials();
-            var_dump("passa aqui?? 2");
-            $meuClient->addScope(Google_Service_Drive::DRIVE);
-            // var_dump($meuClient);
-            $tokenCallback = function ($cacheKey, $tokenDeAcesso) {
-                var_dump($cacheKey);
-                var_dump("ola mundo 123");
-                var_dump($tokenDeAcesso);
-                // $this->meuToken->access_token  = $accessToken;
-            };
-            $meuClient->setTokenCallback($tokenCallback);
-            $httpClient = $meuClient->authorize(); 
-            // $meuServico = new Google_Service_Drive($meuClient);
-            // var_dump($httpClient);     
-            $this->meuToken->save();
-            // $response = $httpClient->get('https://www.googleapis.com/auth/drive');
+           $this->meuToken->atualizaToken(); 
         }
-        // return $this->meuToken->access_token;
+        return $this->meuToken->access_token;
     }
 }
