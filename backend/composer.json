@@ -8,6 +8,7 @@
         "php": "^7.2",
         "barryvdh/laravel-cors": "^0.11.4",
         "google/apiclient": "^2.0",
+        "guzzlehttp/guzzle": "^6.5",
         "laravel/lumen-framework": "^6.0"
     },
     "require-dev": {

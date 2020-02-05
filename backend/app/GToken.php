@@ -14,14 +14,6 @@ class GToken extends Model
     protected $guarded = [];
     protected $meuToken;
 
-    public function __construct()
-    {
-        // var_dump("bateu aqui");
-        // $this->meuToken = self::firstOrCreate([
-        //     'id' => 1
-        // ]);
-    }
-
 
     public function atualizaToken(){
         $meuToken = null;

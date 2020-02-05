@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Arquivo;
 use Illuminate\Http\Request;
-use App\MeuLogger;
 use App\GToken;
-use Google_Client;
-use Google_Service_Drive;
-use Exception;
+
 
 class ArquivosController extends Controller
 {
@@ -36,8 +33,9 @@ class ArquivosController extends Controller
     }
 
     public function teste(){
-        $objToken = new GToken;
-        var_dump($objToken->getAccessToken());
+        // $objToken = new GToken;
+        // var_dump($objToken->getAccessToken());
+        GDriveController::getArquivos();
 
     }
     
@@ -87,10 +85,7 @@ class ArquivosController extends Controller
         foreach($listaNomes as $a){
             Arquivo::create($a);
         }
-        // $oneDrive = new MOneDrive;
-        // foreach($listaNomesConteudo as $a){
-        //     $oneDrive->salvaArquivo($a['nome'], $a['conteudo']);
-        // }
+
         return response()->json($listaNomes);
     }
 }
