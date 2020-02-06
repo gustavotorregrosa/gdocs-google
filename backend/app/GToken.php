@@ -41,7 +41,7 @@ class GToken extends Model
         }
     
         $tokenExpirado = false;
-        if(Carbon::now()->diffInMinutes($this->meuToken->updated_at) > 5){
+        if(Carbon::now()->diffInMinutes($this->meuToken->updated_at) > 10){
             $tokenExpirado = true;
         }
 

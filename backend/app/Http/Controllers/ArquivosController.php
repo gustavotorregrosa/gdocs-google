@@ -62,6 +62,8 @@ class ArquivosController extends Controller
         $fp = fopen("arquivos/".$nome, "w");
         $data = base64_decode($arq['base64']);
         fwrite($fp, $data);
+        GDriveController::salvaArquivo($nome);
+       
         fclose($fp);
         return [
             'nome' => $nome,
@@ -76,6 +78,7 @@ class ArquivosController extends Controller
         $listaNomesConteudo = [];
         foreach($arquivos as $a){
             $arrayTempParamArquivo = $this->salvarUnit($a);
+           
             $listaNomesConteudo[] = $arrayTempParamArquivo;
             $listaNomes[] = [
                 'nomeoriginal' => $a['name'],
@@ -84,6 +87,9 @@ class ArquivosController extends Controller
         }
         foreach($listaNomes as $a){
             Arquivo::create($a);
+            
+            
+
         }
 
         return response()->json($listaNomes);
