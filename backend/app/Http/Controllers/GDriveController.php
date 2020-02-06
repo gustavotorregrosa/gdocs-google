@@ -17,16 +17,16 @@ class GDriveController extends Controller
         //
     }
 
-    public static function getArquivos(){
+    public static function getArquivos()
+    {
         $objToken = new GToken;
         $token = $objToken->getAccessToken();
-        $token = "Bearer ".$token;
-        $headers = "Authorization: ".$token;
-       
+        $token = "Bearer " . $token;
+        $headers = "Authorization: " . $token;
+
         $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL,"https://www.googleapis.com/drive/v3/files");
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        // curl_setopt($ch,CURLOPT_HEADER, true); //if you want headers
+        curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/drive/v3/files");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [$headers]);
         $output = curl_exec($ch);
         var_dump($output);
@@ -34,23 +34,16 @@ class GDriveController extends Controller
     }
 
 
-    public static function salvaArquivo($arquivo){
-       
-       
+    public static function salvaArquivo($arquivo)
+    {
         $objToken = new GToken;
         $token = $objToken->getAccessToken();
-        $token = "Bearer ".$token;
-        $headers = ["Authorization: ".$token, "uploadType: media", "mimeType: application/pdf"];
-
-        
-        // $fp = fopen("arquivos/".$arquivo, "r");
-       
+        $token = "Bearer " . $token;
+        $headers = ["Authorization: " . $token, "uploadType: media", "mimeType: application/pdf"];
 
 
-     
-        
         $ch = curl_init();
-        $caminho = "arquivos/".$arquivo;
+        $caminho = "arquivos/" . $arquivo;
         $tipo = 'application/pdf';
         $arquivoUpload = new CURLFile($caminho, $tipo, "meuarquivo.pdf");
         $params = [
@@ -59,88 +52,37 @@ class GDriveController extends Controller
             'fields' => 'id'
 
         ];
-        curl_setopt($ch,CURLOPT_URL,"https://www.googleapis.com/upload/drive/v3/files");
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch,CURLOPT_POST,true);
-        // curl_setopt($ch,CURLOPT_FILE, $arquivo);
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $params);
-        // curl_setopt($ch,CURLOPT_HEADER, true); //if you want headers
+        curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/upload/drive/v3/files");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         $output = curl_exec($ch);
-        var_dump($output);
+        $output = json_decode($output);
         curl_close($ch);
+        return $output->id;
+    }
 
-        // $guzzleClient = new \GuzzleHttp\Client([
-        //     'timeout'  => 10.0
-        // ]);
+    public static function getArquivo($arquivo)
+    {
+        $idGDocs = $arquivo->idGdocs; 
+        $objToken = new GToken;
+        $token = $objToken->getAccessToken();
+        $token = "Bearer " . $token;
+        $headers = "Authorization: " . $token;
 
-      
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/drive/v3/files/".$idGDocs."?alt=media");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [$headers]);
+        $output = curl_exec($ch);
+        $nome = str_replace(' ', '', $arquivo->nomeoriginal);
 
-        // $guzzleRequest = new \GuzzleHttp\Psr7\Request('POST',  'https://www.googleapis.com/upload/drive/v3/files', $headers, $fp);
-
-        // $promise = $guzzleClient->sendAsync($guzzleRequest);
-        // $promise->wait();
-        // $promise->then(
-        //     function ($res) {
-        //         var_dump("deu certo...");
-        //         var_dump($res);
-        //         echo $res->getStatusCode() . "\n";
-        //     },
-        //     function ($e) {
-        //         var_dump("deu errado...");
-        //         echo $e->getMessage() . "\n";
-        //         echo $e->getRequest()->getMethod();
-        //     }
-        // );
-    // }
-       
-
-        // $client->request('POST', 'https://www.googleapis.com/upload/drive/v3/files', ['body' => $fp], [
-        //     'headers' => $headers
-        // ]);
-
+        $fp = fopen("arquivosNuvem/".$nome, "w");
+        fwrite($fp, $output);
+        curl_close($ch);
+        return $nome;
         
 
-        
-        
-        // var_dump("arquivo... ");
-        // var_dump($arquivo);
-        // $fileMetadata = new Google_Service_Drive_DriveFile(array(
-        //     'name' => 'photo.jpg'));
-        // $content = file_get_contents('files/photo.jpg');
-        // $file = $driveService->files->create($fileMetadata, array(
-        //     'data' => $content,
-        //     'mimeType' => 'image/jpeg',
-        //     'uploadType' => 'multipart',
-        //     'fields' => 'id'));
-        // printf("File ID: %s\n", $file->id);
-        
-
-
-        // $objToken = new GToken;
-        // $token = $objToken->getAccessToken();
-        // $token = "Bearer ".$token;
-        // $headers = ["Authorization: ".$token, "uploadType: media", "mimeType: application/pdf"];
-
-        // $params = [
-        //     'fields' => 'id',
-        //     // 'corpo' => $arquivo
-        //     'data' => "ola mundo"
-        // ];
-        
-        // var_dump($headers);
-
-        // $arquivo = "teste gustavo 123";
-
-        // var_dump($arquivo);
-        // // $arquivo = file_get_contents($arquivo);
-        // // var_dump($arquivo);
-
-
-     
-
-    // }
-
-    //
-        }
+    }
 }

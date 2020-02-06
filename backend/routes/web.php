@@ -19,6 +19,8 @@ $router->post('/salvaarquivos', 'ArquivosController@salvar');
 
 $router->get('/getarquivos', 'ArquivosController@index');
 
+$router->get('/getarquivos/gdocs/{id}', 'ArquivosController@getArquivoGDocs');
+
 $router->delete('/deletaarquivo/{id}', 'ArquivosController@delete');
 
 $router->get('/teste', 'ArquivosController@teste');

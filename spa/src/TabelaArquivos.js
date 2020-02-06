@@ -24,6 +24,12 @@ class TabelaArquivos extends Component {
                         &nbsp;
                         &nbsp;
 
+                        <a onClick={(e) => this.props.ativaDownloadGDocs(e, id)} href="#">
+                            <i className="material-icons">cloud_download</i>
+                        </a>
+                        &nbsp;
+                        &nbsp;
+
                         <a
                         onClick={(e) => this.props.abreModalDeleta(e, id)}
                         style={{

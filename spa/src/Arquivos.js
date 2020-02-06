@@ -36,6 +36,19 @@ class Arquivos extends Component {
     }
 
 
+    chamaDownloadGDocs = (e, id) => {
+        e.preventDefault()
+        // let nome
+        // this.state.arquivos.map(arq => {
+        //     if (arq.id == id) {
+        //         nome = arq.nome
+        //     }
+        // })
+        let url = 'http://gdocs.test/getarquivos/gdocs/' + id
+        this.openInNewTab(url)
+    }
+
+
     openInNewTab = (url) => {
         // let win = window.open(url, '_blank');
         let win = window.open(url, 'Download');
@@ -123,7 +136,7 @@ class Arquivos extends Component {
                 </div>
                 <br /><br /><br /><br /><br /><br />
                 <div className="row">
-                    <TabelaArquivos abreModalDeleta={(e, key) => this.abreModalDeleta(e, key)} ativaDownload={(e, key) => this.chamaDownload(e, key)} arquivos={this.state.arquivos} />
+                    <TabelaArquivos ativaDownloadGDocs={(e, key) => this.chamaDownloadGDocs(e, key)} abreModalDeleta={(e, key) => this.abreModalDeleta(e, key)} ativaDownload={(e, key) => this.chamaDownload(e, key)} arquivos={this.state.arquivos} />
 
                 </div>
                 <DeletaArquivo refreshArquivos={() => this.getArquivos()} setAbreModal={f => this.childAbreModalDeleta = f}/>

@@ -18,6 +18,7 @@ class CriaTblArquivos extends Migration
             // $table->string('id_one_drive')->nullable();
             $table->string('nome');
             $table->string('nomeoriginal');
+            $table->string('idGdocs');
             $table->timestamps();
         });
     }

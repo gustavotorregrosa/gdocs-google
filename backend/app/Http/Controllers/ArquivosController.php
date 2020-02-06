@@ -33,10 +33,15 @@ class ArquivosController extends Controller
     }
 
     public function teste(){
-        // $objToken = new GToken;
-        // var_dump($objToken->getAccessToken());
         GDriveController::getArquivos();
 
+    }
+
+    public function getArquivoGDocs(Request $request, $id){
+        $arquivo = Arquivo::find($id);
+        $nome = GDriveController::getArquivo($arquivo);
+        $novaURL = $request->root()."/arquivosNuvem/".$nome;
+        return redirect($novaURL);
     }
     
     public function geraNome($nomeatual)
@@ -62,12 +67,13 @@ class ArquivosController extends Controller
         $fp = fopen("arquivos/".$nome, "w");
         $data = base64_decode($arq['base64']);
         fwrite($fp, $data);
-        GDriveController::salvaArquivo($nome);
+        $idGdocs = GDriveController::salvaArquivo($nome);
        
         fclose($fp);
         return [
             'nome' => $nome,
-            'conteudo' => $data
+            'conteudo' => $data,
+            'idGdocs' => $idGdocs
         ];
     }
 
@@ -82,14 +88,13 @@ class ArquivosController extends Controller
             $listaNomesConteudo[] = $arrayTempParamArquivo;
             $listaNomes[] = [
                 'nomeoriginal' => $a['name'],
-                'nome' => $arrayTempParamArquivo['nome']
+                'nome' => $arrayTempParamArquivo['nome'],
+                'idGdocs' => $arrayTempParamArquivo['idGdocs']
             ];
         }
+
         foreach($listaNomes as $a){
             Arquivo::create($a);
-            
-            
-
         }
 
         return response()->json($listaNomes);
